@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Results summary component</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+      body,
+      h1,
+      p {
+        margin: 0;
+      }
+      .flex-container {
+        background-color: hsl(0, 0%, 100%);
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+      .flex-items {
+        background-color: white;
+        height: 390px;
+        width: 300px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+      }
+      .score-card {
+        /* background-color: blue; */
+        border-radius: 12px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 30px;
+      }
+
+      .title {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        /* text-align: center; */
+        padding: 20px 0;
+        color: hsl(241, 100%, 89%);
+      }
+      .gradient-background {
+        background: linear-gradient(hsl(252, 100%, 67%), hsl(241, 81%, 54%));
+        /*background: linear-gradient(
+          300deg,
+          hsl(252, 100%, 67%),
+          hsl(241, 81%, 54%)
+        );
+         background-size: 180% 180%;
+        animation: gradient-animation 18s ease infinite;*/
+      }
+
+      @keyframes gradient-animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .mark-circle {
+        background: linear-gradient(
+          hsla(256, 72%, 46%, 1),
+          hsla(241, 72%, 46%, 0)
+        );
+        height: 125px;
+        width: 125px;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+      .mark-obtained {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 46px;
+        color: hsl(0, 0%, 100%);
+      }
+      .total-mark {
+        font-family: "Hanken Grotesk", sans-serif;
+        color: hsl(247, 96%, 71%);
+      }
+      .grade-status {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-weight: 800;
+        color: hsl(0, 0%, 100%);
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+      .description {
+        color: hsl(241, 100%, 89%);
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 18px;
+        text-align: center;
+      }
+      .summary-card {
+        padding: 20px;
+      }
+      .summary-title {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+      .summary-content-container {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        align-items: center;
+      }
+      .summary-content-container p {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 18px;
+      }
+      .skill {
+        flex: 1;
+      }
+      .summary-content-container > img {
+        margin-right: 10px;
+      }
+      .reaction-bg {
+        background-color: hsl(6, 100%, 98%);
+      }
+      .memory-bg {
+        background-color: hsl(42, 100%, 97%);
+      }
+      .verbal-bg {
+        background-color: hsl(173, 53%, 97%);
+      }
+      .visual-bg {
+        background-color: hsl(240, 71%, 97%);
+      }
+      .reaction-bg .skill {
+        color: hsl(0, 100%, 67%);
+      }
+      .memory-bg .skill {
+        color: hsl(39, 100%, 56%);
+      }
+      .verbal-bg .skill {
+        color: hsl(166, 100%, 37%);
+      }
+      .visual-bg .skill {
+        color: hsl(234, 85%, 45%);
+      }
+      .skill-mark {
+        color: hsl(236, 9%, 68%);
+      }
+      .skill-mark span {
+        color: hsl(231, 19%, 28%);
+        font-weight: bold;
+      }
+      .continue-button {
+        background-color: hsl(224, 30%, 27%);
+        color: hsl(197, 100%, 99%);
+        margin-top: 20px;
+        padding: 15px 20px;
+        width: 100%;
+        font-size: 18px;
+        font-family: "Hanken Grotesk", sans-serif;
+        border-radius: 130px;
+        border: none;
+      }
+      .continue-button:hover {
+        cursor: pointer;
+        background: linear-gradient(hsl(252, 100%, 67%), hsl(241, 81%, 54%));
+      }
+
+      @media (max-width: 375px) {
+        .flex-container {
+          flex-direction: column;
+        }
+        .score-card {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+        .grade-status {
+          margin-bottom: 10px;
+        }
+        .description {
+          font-size: 15px;
+        }
+      }
+      @media (min-width: 376px) {
+        .left-border {
+          border-bottom-left-radius: 12px;
+          border-top-left-radius: 12px;
+        }
+        .right-border {
+          border-bottom-right-radius: 12px;
+          border-top-right-radius: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex-container">
+      <div class="flex-items left-border">
+        <div class="score-card gradient-background">
+          <p class="title">Your Result</p>
+          <div class="mark-circle">
+            <h1 class="mark-obtained">76</h1>
+            <p class="total-mark">of 100</p>
+          </div>
+          <p class="grade-status">Great</p>
+          <p class="description">
+            You scored higher than 65% of the people who have taken these tests.
+          </p>
+        </div>
+      </div>
+      <div class="flex-items right-border">
+        <div class="summary-card">
+          <p class="summary-title">Summary</p>
+          <div class="summary-content-container reaction-bg">
+            <img src="./images/icon-reaction.svg" alt="reaction-icon" />
+            <p class="skill">Reaction</p>
+            <p class="skill-mark"><span>80</span> / 100</p>
+          </div>
+          <div class="summary-content-container memory-bg">
+            <img src="./images/icon-memory.svg" alt="memory-icon" />
+            <p class="skill">Memory</p>
+            <p class="skill-mark"><span>92</span> / 100</p>
+          </div>
+          <div class="summary-content-container verbal-bg">
+            <img src="./images/icon-verbal.svg" alt="verbal-icon" />
+            <p class="skill">Verbal</p>
+            <p class="skill-mark"><span>61</span> / 100</p>
+          </div>
+          <div class="summary-content-container visual-bg">
+            <img src="./images/icon-visual.svg" alt="Visual-icon" />
+            <p class="skill">Visual</p>
+            <p class="skill-mark"><span>72</span> / 100</p>
+          </div>
+          <button class="continue-button">Continue</button>
+        </div>
+      </div>
+    </div>
+    <!--  Summary Reaction 80 / 100 Memory 92 / 100 Verbal 61
+    / 100 Visual 72 / 100 
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div> -->
+  </body>
+</html>
